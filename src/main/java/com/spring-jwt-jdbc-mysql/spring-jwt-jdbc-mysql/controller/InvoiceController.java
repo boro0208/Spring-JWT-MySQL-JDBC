@@ -17,31 +17,31 @@ public class InvoiceController {
     private InvoiceService invoiceService;
 
 
-    @GetMapping("/find/all")
+    @GetMapping("/user/all")
     public List<Invoice> findAll() {
         List<Invoice> invoices = invoiceService.getAllInvoices();
         return invoices;
     }
 
-    @GetMapping("/find/{id}")
+    @GetMapping("/user/byId/{id}")
     public ResponseEntity<Invoice> getInvoiceById(@PathVariable("id") Integer id) {
         Invoice invoice = invoiceService.getInvoiceById(id);
         return new ResponseEntity<Invoice>(invoice, HttpStatus.OK);
     }
 
-    @PostMapping(path="/add", consumes = "application/json", produces = "application/json")
+    @PostMapping(path="/user/add")
     public  ResponseEntity<Invoice> addNewInvoice(@RequestBody Invoice inv) {
         Invoice invoice = invoiceService.addNewInvoice(inv);
         return new ResponseEntity<Invoice>( invoice,HttpStatus.OK);
     }
 
-    @PutMapping(path = "/update")
+    @PutMapping(path = "/user/update")
     public ResponseEntity<Invoice> updateInvoice(@RequestBody Invoice invoice){
         invoiceService.updateInvoice(invoice);
         return new ResponseEntity<Invoice>(invoice, HttpStatus.OK);
     }
 
-    @DeleteMapping(path="/delete/{id}")
+    @DeleteMapping(path="/admin/delete/{id}")
     public ResponseEntity<Void> deleteById(@PathVariable("id") Integer id){
         invoiceService.deleteInvoiceById(id);
         return new ResponseEntity<Void>( HttpStatus.NO_CONTENT);
